@@ -17,8 +17,8 @@ export class Confirm extends Component {
   };
   render() {
     const {
-      formData: { firstName, lastName, email, city, bio, occupation },
-    } = this.props;
+      formData: { firstName, lastName, email, city, bio, occupation },} = this.props;
+      
     return (
       <MuiThemeProvider>
         <React.Fragment>

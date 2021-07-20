@@ -13,16 +13,13 @@ export class FormUserDetails extends Component {
     this.props.nextStep();
   };
 
+  handleChange = (key) => (e) => {
+    this.props.handleFromsData(key, e.target.value);
+  };
+
+
   render() {
-    console.log(this.props.step);
-    console.log(this.props.formData);
-
     const { formData } = this.props;
-
-    handleChange = (key) => (e) => {
-      this.props.handleFromsData(key, e.target.value);
-    };
-
     return (
       <MuiThemeProvider>
         <React.Fragment>

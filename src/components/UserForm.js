@@ -19,8 +19,8 @@ export class UserForm extends Component {
         return <Confirm />;
       case 4:
         return <Success></Success>;
-
       default:
+        return <h2>Some error occour</h2>
     }
   }
 }
