@@ -3,17 +3,14 @@ const path=require('path');
 const router=require('./routes/api/members')
 const logger =require('./middleware/logger'); 
 const app = express();
-
-
-
-
+const cors = require('cors')
  
 //Init Middleware
 
 //app.use(logger);
 
 //Body Parser Middleware
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 

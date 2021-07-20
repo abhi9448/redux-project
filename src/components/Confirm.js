@@ -5,19 +5,20 @@ import { List, ListItem } from "material-ui/List";
 import RaisedButton from "material-ui/RaisedButton";
 import { connect } from "react-redux";
 import { nextStep, preStep } from "../actions/step";
+import { addUser } from '../apiHandler/apiBase';
+
 
 export class Confirm extends Component {
-  continue = (e) => {
-    e.preventDefault();
+  
+  addUserToBackend = () => {
+    const { formData} = this.props;
+    addUser(formData)
+    .then(res => console.log(res));
     this.props.nextStep();
-  };
-  back = (e) => {
-    e.preventDefault();
-    this.props.prevStep();
-  };
+  }
+
   render() {
-    const {
-      formData: { firstName, lastName, email, city, bio, occupation },} = this.props;
+    const { formData: { firstName, lastName, email, city, bio, occupation },} = this.props;
       
     return (
       <MuiThemeProvider>
@@ -32,7 +33,7 @@ export class Confirm extends Component {
             <ListItem primaryText="Bio" secondaryText={bio} />
           </List>
           <br />
-          <RaisedButton label="confirm & continue" primary={true} style={styles.button} onClick={this.props.nextStep} />
+          <RaisedButton label="confirm & continue" primary={true} style={styles.button} onClick={this.addUserToBackend} />
           <RaisedButton label="back" primary={true} style={styles.button} onClick={this.props.preStep} />
         </React.Fragment>
       </MuiThemeProvider>
