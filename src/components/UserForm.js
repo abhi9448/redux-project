@@ -5,6 +5,7 @@ import Confirm from "./Confirm";
 import Success from "./Success";
 import { connect } from "react-redux";
 import { nextStep, preStep } from "../actions/step";
+import DataTable from "./allmembers";
 
 export class UserForm extends Component {
   render() {
@@ -19,6 +20,8 @@ export class UserForm extends Component {
         return <Confirm />;
       case 4:
         return <Success></Success>;
+      case 5: 
+        return <DataTable />;
       default:
         return <h2>Some error occour</h2>
     }

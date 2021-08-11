@@ -4,7 +4,10 @@ const router=require('./routes/api/members')
 const logger =require('./middleware/logger'); 
 const app = express();
 const cors = require('cors')
- 
+
+const db = require('./db/mongodb');
+
+db.connect();
 //Init Middleware
 
 //app.use(logger);
@@ -25,3 +28,4 @@ app.use('/api/members',require('./routes/api/members'))
 const PORT = process.eventNames.PORT || 5000;
 
 app.listen(PORT,()=>console.log(`Server started on port ${PORT}`));
+

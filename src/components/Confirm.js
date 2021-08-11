@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
 import { List, ListItem } from "material-ui/List";
-import RaisedButton from "material-ui/RaisedButton";
+import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import { nextStep, preStep } from "../actions/step";
 import { addUser } from '../apiHandler/apiBase';
+
 
 
 export class Confirm extends Component {
@@ -13,8 +13,7 @@ export class Confirm extends Component {
   addUserToBackend = () => {
     const { formData} = this.props;
     addUser(formData)
-    .then(res => console.log(res));
-    this.props.nextStep();
+   this.props.nextStep();
   }
 
   render() {
@@ -23,7 +22,7 @@ export class Confirm extends Component {
     return (
       <MuiThemeProvider>
         <React.Fragment>
-          <AppBar title="Confirm" />
+          
           <List>
             <ListItem primaryText="First Name" secondaryText={firstName} />
             <ListItem primaryText="Last Name" secondaryText={lastName} />
@@ -33,8 +32,10 @@ export class Confirm extends Component {
             <ListItem primaryText="Bio" secondaryText={bio} />
           </List>
           <br />
-          <RaisedButton label="confirm & continue" primary={true} style={styles.button} onClick={this.addUserToBackend} />
-          <RaisedButton label="back" primary={true} style={styles.button} onClick={this.props.preStep} />
+          
+          <Button variant="contained" color="primary" style={styles.button}  onClick={this.addUserToBackend} >CONFIRM & CONTINUE</Button>
+          
+          <Button variant="contained" color="primary" value="continue" onClick={this.props.preStep} >BACK</Button>
         </React.Fragment>
       </MuiThemeProvider>
     );

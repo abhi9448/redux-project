@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
+import Button from "@material-ui/core/Button";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import { connect } from "react-redux";
@@ -9,27 +9,70 @@ import { handleFromsData } from "../actions/formData";
 
 
 export class FormPersonalDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      occupationError: "",
+      cityError: "",
+      bioError: "",
+    };
+  }
 
   handleChange = (key) => (e) => {
     this.props.handleFromsData(key, e.target.value);
   };
-
+  onButtonClickHandler_ = () => {
+    const { formData } = this.props;
+    let FormDataError = false;
+    if (formData.occupation.length === 0) {
+      FormDataError = true;
+      this.setState({ occupationError: "Please enter Occupation " });
+    }
+    if (formData.city.length === 0) {
+      FormDataError = true;
+      this.setState({ cityError: "Please enter City " });
+    }
+    if (formData.bio.length === 0) {
+      FormDataError = true;
+      this.setState({ bioError: "Please enter  Bio" });
+    }
+    if (!FormDataError) {
+      this.props.nextStep();
+    }
+  };
 
   render() {
     const { formData } = this.props;
     return (
       <MuiThemeProvider>
         <React.Fragment>
-          <AppBar title="Enter your details" />
           <TextField hintText="Occupation" floatingLabelText="Occupation" onChange={this.handleChange("occupation")} defaultValue={formData.occupation} />
           <br />
+          <font color="red">
+          {this.state.occupationError}
+          </font>
+          <br/>
 
           <TextField hintText="Enter your City" floatingLabelText="City" onChange={this.handleChange("city")} defaultValue={formData.city} />
           <br />
+          <font color="red">
+          {this.state.cityError}
+          </font>
+          <br/>
           <TextField hintText="Bio" floatingLabelText="Bio" onChange={this.handleChange("bio")} defaultValue={formData.bio} />
           <br />
-          <RaisedButton label="continue" primary={true} style={styles.button} onClick={this.props.nextStep} />
-          <RaisedButton label="back" primary={true} style={styles.button} onClick={this.props.preStep} />
+          <font color="red">
+          {this.state.bioError}
+          </font>
+          <br/>
+
+          <Button variant="contained" color="primary" style={styles.button} onClick={this.onButtonClickHandler_}>
+            CONTINUE
+          </Button>
+
+          <Button variant="contained" color="primary" value="continue" onClick={this.props.preStep}>
+            BACK
+          </Button>
         </React.Fragment>
       </MuiThemeProvider>
     );
